@@ -25,3 +25,5 @@ Version numbers in windhawk mods should be 4 values eg 1.2.3.4 and you should ra
 
 All mods should be configurable in windhawk no hardcoded key combos, or values, User should be able to define everying custom. key combos should allow for 2 modifiers (though 1 of them can be optionally disabled) plus any letter or symbol eg ctrl+shift+q or ctrl+q or Shift+Alt+q 
 
+
+NEVER CHANGE THE ID OR THE NAME OF ANY EXISTING MOD! The only header info you can change for an existing mod is the Version, Include, CompilerOptions, and (with consideration) appending or slightly changing the description. (This rule does not apply to entirely new mods.)
