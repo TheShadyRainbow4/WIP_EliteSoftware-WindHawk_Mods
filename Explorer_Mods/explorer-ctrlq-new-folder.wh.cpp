@@ -1,8 +1,8 @@
 // ==WindhawkMod==
 // @id              explorer-ctrlq-new-folder
-// @name            Explorer Custom Hotkey = New Folder
+// @name            Explorer Ctrl + Modifier = New Folder
 // @description     Press a custom hotkey (default Ctrl+Q) in Explorer to create a new folder in current path.
-// @version         1.4.7.5
+// @version         1.4.7.9
 // @author          TheShadyRainbow4
 // @github          https://github.com/theshadyrainbow4
 // @homepage        https://main.elitesoftwaretech.cc
