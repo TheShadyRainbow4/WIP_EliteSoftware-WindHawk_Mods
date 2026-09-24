@@ -95,17 +95,17 @@ The mod utilizes Windhawk to inject a `WH_KEYBOARD_LL` (low-level keyboard hook)
   - 7: 7
   - 8: 8
   - 9: 9
-  - Comma: , (Comma)
-  - Slash: / (Slash)
-  - Semicolon: ; (Semicolon)
-  - Quote: ' (Quote)
-  - LBracket: [ (Left Bracket)
-  - RBracket: ] (Right Bracket)
-  - Backslash: \ (Backslash)
-  - Minus: - (Minus)
-  - Equals: = (Equals)
-  - Backtick: ` (Backtick)
-  - Multiply: * (Multiply)
+  - Comma: ", (Comma)"
+  - Slash: "/ (Slash)"
+  - Semicolon: "; (Semicolon)"
+  - Quote: "' (Quote)"
+  - LBracket: "[ (Left Bracket)"
+  - RBracket: "] (Right Bracket)"
+  - Backslash: "\\ (Backslash)"
+  - Minus: "- (Minus)"
+  - Equals: "= (Equals)"
+  - Backtick: "` (Backtick)"
+  - Multiply: "* (Multiply)"
 - folderName: New folder
   $name: Default Folder Name
   $description: The default name for the new folder
