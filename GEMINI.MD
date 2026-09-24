@@ -27,3 +27,5 @@ All mods should be configurable in windhawk no hardcoded key combos, or values, 
 
 
 NEVER CHANGE THE ID OR THE NAME OF ANY EXISTING MOD! The only header info you can change for an existing mod is the Version, Include, CompilerOptions, and (with consideration) appending or slightly changing the description. (This rule does not apply to entirely new mods.)
+
+Any temporary Python scripts or scratch files (.py) created to perform complex edits must be deleted from the workspace immediately after they are used so the repository remains clean. Do not commit temporary script files.
