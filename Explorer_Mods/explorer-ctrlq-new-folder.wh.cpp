@@ -2,7 +2,7 @@
 // @id              explorer-ctrlq-new-folder
 // @name            Explorer Custom Hotkey = New Folder
 // @description     Press a custom hotkey (default Ctrl+Q) in Explorer to create a new folder in current path.
-// @version         1.4.7.2
+// @version         1.4.7.5
 // @author          TheShadyRainbow4
 // @github          https://github.com/theshadyrainbow4
 // @homepage        https://main.elitesoftwaretech.cc
@@ -38,27 +38,75 @@ The mod utilizes Windhawk to inject a `WH_KEYBOARD_LL` (low-level keyboard hook)
 
 // ==WindhawkModSettings==
 /*
-- modifier1: Ctrl
+- modifier1: "Ctrl"
   $name: First Modifier
   $description: Primary modifier key
   $options:
-  - Ctrl: Ctrl
-  - Shift: Shift
-  - Alt: Alt
-  - Win: Windows Key
-- modifier2: None
+  - "Ctrl": "Ctrl"
+  - "Shift": "Shift"
+  - "Alt": "Alt"
+  - "Win": "Windows Key"
+- modifier2: "None"
   $name: Second Modifier (Optional)
   $description: Secondary modifier key
   $options:
-  - None: None
-  - Ctrl: Ctrl
-  - Shift: Shift
-  - Alt: Alt
-  - Win: Windows Key
-- hotkey: Q
+  - "None": "None"
+  - "Ctrl": "Ctrl"
+  - "Shift": "Shift"
+  - "Alt": "Alt"
+  - "Win": "Windows Key"
+- hotkey: "Q"
   $name: Hotkey Character
   $description: The letter or character for the hotkey
-- folderName: New folder
+  $options:
+  - "A": "A"
+  - "B": "B"
+  - "C": "C"
+  - "D": "D"
+  - "E": "E"
+  - "F": "F"
+  - "G": "G"
+  - "H": "H"
+  - "I": "I"
+  - "J": "J"
+  - "K": "K"
+  - "L": "L"
+  - "M": "M"
+  - "N": "N"
+  - "O": "O"
+  - "P": "P"
+  - "Q": "Q"
+  - "R": "R"
+  - "S": "S"
+  - "T": "T"
+  - "U": "U"
+  - "V": "V"
+  - "W": "W"
+  - "X": "X"
+  - "Y": "Y"
+  - "Z": "Z"
+  - "0": "0"
+  - "1": "1"
+  - "2": "2"
+  - "3": "3"
+  - "4": "4"
+  - "5": "5"
+  - "6": "6"
+  - "7": "7"
+  - "8": "8"
+  - "9": "9"
+  - "Comma": ", (Comma)"
+  - "Slash": "/ (Slash)"
+  - "Semicolon": "; (Semicolon)"
+  - "Quote": "' (Quote)"
+  - "LBracket": "[ (Left Bracket)"
+  - "RBracket": "] (Right Bracket)"
+  - "Backslash": "\ (Backslash)"
+  - "Minus": "- (Minus)"
+  - "Equals": "= (Equals)"
+  - "Backtick": "` (Backtick)"
+  - "Multiply": "* (Multiply)"
+- folderName: "New folder"
   $name: Default Folder Name
   $description: The default name for the new folder
 */
@@ -100,10 +148,39 @@ static int GetModifierVK(const std::wstring& modStr) {
 
 static int GetHotkeyVK(const std::wstring& keyStr) {
     if (keyStr.empty()) return 'Q';
+    
     if (keyStr.length() == 1) {
-        return towupper(keyStr[0]);
+        wchar_t c = towupper(keyStr[0]);
+        if (c >= L'A' && c <= L'Z') return c;
+        if (c >= L'0' && c <= L'9') return c;
+        switch (c) {
+            case L',': return VK_OEM_COMMA;
+            case L'/': return VK_OEM_2;
+            case L';': return VK_OEM_1;
+            case L'\'': return VK_OEM_7;
+            case L'[': return VK_OEM_4;
+            case L']': return VK_OEM_6;
+            case L'\': return VK_OEM_5;
+            case L'-': return VK_OEM_MINUS;
+            case L'=': return VK_OEM_PLUS;
+            case L'`': return VK_OEM_3;
+            case L'*': return VK_MULTIPLY;
+        }
     }
-    return towupper(keyStr[0]);
+    
+    if (keyStr == L"Comma") return VK_OEM_COMMA;
+    if (keyStr == L"Slash") return VK_OEM_2;
+    if (keyStr == L"Semicolon") return VK_OEM_1;
+    if (keyStr == L"Quote") return VK_OEM_7;
+    if (keyStr == L"LBracket") return VK_OEM_4;
+    if (keyStr == L"RBracket") return VK_OEM_6;
+    if (keyStr == L"Backslash") return VK_OEM_5;
+    if (keyStr == L"Minus") return VK_OEM_MINUS;
+    if (keyStr == L"Equals") return VK_OEM_PLUS;
+    if (keyStr == L"Backtick") return VK_OEM_3;
+    if (keyStr == L"Multiply") return VK_MULTIPLY;
+    
+    return 'Q';
 }
 
 static void LoadSettings() {
