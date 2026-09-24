@@ -38,53 +38,53 @@ The mod utilizes Windhawk to inject a `WH_KEYBOARD_LL` (low-level keyboard hook)
 
 // ==WindhawkModSettings==
 /*
-- modifier1: Ctrl
+- modifier1: ctrl
   $name: First Modifier
   $description: Primary modifier key
   $options:
-  - Ctrl: Ctrl
-  - Shift: Shift
-  - Alt: Alt
-  - Win: Windows Key
-- modifier2: None
+  - ctrl: Ctrl
+  - shift: Shift
+  - alt: Alt
+  - win: Windows Key
+- modifier2: none
   $name: Second Modifier (Optional)
   $description: Secondary modifier key
   $options:
-  - None: None
-  - Ctrl: Ctrl
-  - Shift: Shift
-  - Alt: Alt
-  - Win: Windows Key
-- hotkey: Q
+  - none: None
+  - ctrl: Ctrl
+  - shift: Shift
+  - alt: Alt
+  - win: Windows Key
+- hotkey: q
   $name: Hotkey Character
   $description: The letter or character for the hotkey
   $options:
-  - A: A
-  - B: B
-  - C: C
-  - D: D
-  - E: E
-  - F: F
-  - G: G
-  - H: H
-  - I: I
-  - J: J
-  - K: K
-  - L: L
-  - M: M
-  - N: N
-  - O: O
-  - P: P
-  - Q: Q
-  - R: R
-  - S: S
-  - T: T
-  - U: U
-  - V: V
-  - W: W
-  - X: X
-  - Y: Y
-  - Z: Z
+  - a: A
+  - b: B
+  - c: C
+  - d: D
+  - e: E
+  - f: F
+  - g: G
+  - h: H
+  - i: I
+  - j: J
+  - k: K
+  - l: L
+  - m: M
+  - n: N
+  - o: O
+  - p: P
+  - q: Q
+  - r: R
+  - s: S
+  - t: T
+  - u: U
+  - v: V
+  - w: W
+  - x: X
+  - y: Y
+  - z: Z
   - '0': '0'
   - '1': '1'
   - '2': '2'
@@ -95,17 +95,17 @@ The mod utilizes Windhawk to inject a `WH_KEYBOARD_LL` (low-level keyboard hook)
   - '7': '7'
   - '8': '8'
   - '9': '9'
-  - Comma: ", (Comma)"
-  - Slash: "/ (Slash)"
-  - Semicolon: "; (Semicolon)"
-  - Quote: "' (Quote)"
-  - LBracket: "[ (Left Bracket)"
-  - RBracket: "] (Right Bracket)"
-  - Backslash: "\\ (Backslash)"
-  - Minus: "- (Minus)"
-  - Equals: "= (Equals)"
-  - Backtick: "` (Backtick)"
-  - Multiply: "* (Multiply)"
+  - comma: ", (Comma)"
+  - slash: "/ (Slash)"
+  - semicolon: "; (Semicolon)"
+  - quote: "' (Quote)"
+  - lbracket: "[ (Left Bracket)"
+  - rbracket: "] (Right Bracket)"
+  - backslash: "\ (Backslash)"
+  - minus: "- (Minus)"
+  - equals: "= (Equals)"
+  - backtick: "` (Backtick)"
+  - multiply: "* (Multiply)"
 - folderName: New folder
   $name: Default Folder Name
   $description: The default name for the new folder
@@ -139,10 +139,10 @@ static int g_hotkey = 'Q';
 static std::wstring g_folderName = L"New folder";
 
 static int GetModifierVK(const std::wstring& modStr) {
-    if (modStr == L"Ctrl") return VK_CONTROL;
-    if (modStr == L"Shift") return VK_SHIFT;
-    if (modStr == L"Alt") return VK_MENU;
-    if (modStr == L"Win") return VK_LWIN;
+    if (modStr == L"ctrl") return VK_CONTROL;
+    if (modStr == L"shift") return VK_SHIFT;
+    if (modStr == L"alt") return VK_MENU;
+    if (modStr == L"win") return VK_LWIN;
     return 0;
 }
 
@@ -168,32 +168,32 @@ static int GetHotkeyVK(const std::wstring& keyStr) {
         }
     }
     
-    if (keyStr == L"Comma") return VK_OEM_COMMA;
-    if (keyStr == L"Slash") return VK_OEM_2;
-    if (keyStr == L"Semicolon") return VK_OEM_1;
-    if (keyStr == L"Quote") return VK_OEM_7;
-    if (keyStr == L"LBracket") return VK_OEM_4;
-    if (keyStr == L"RBracket") return VK_OEM_6;
-    if (keyStr == L"Backslash") return VK_OEM_5;
-    if (keyStr == L"Minus") return VK_OEM_MINUS;
-    if (keyStr == L"Equals") return VK_OEM_PLUS;
-    if (keyStr == L"Backtick") return VK_OEM_3;
-    if (keyStr == L"Multiply") return VK_MULTIPLY;
+    if (keyStr == L"comma") return VK_OEM_COMMA;
+    if (keyStr == L"slash") return VK_OEM_2;
+    if (keyStr == L"semicolon") return VK_OEM_1;
+    if (keyStr == L"quote") return VK_OEM_7;
+    if (keyStr == L"lbracket") return VK_OEM_4;
+    if (keyStr == L"rbracket") return VK_OEM_6;
+    if (keyStr == L"backslash") return VK_OEM_5;
+    if (keyStr == L"minus") return VK_OEM_MINUS;
+    if (keyStr == L"equals") return VK_OEM_PLUS;
+    if (keyStr == L"backtick") return VK_OEM_3;
+    if (keyStr == L"multiply") return VK_MULTIPLY;
     
     return 'Q';
 }
 
 static void LoadSettings() {
     PCWSTR pMod1 = Wh_GetStringSetting(L"modifier1");
-    int mod1 = GetModifierVK(pMod1 ? pMod1 : L"Ctrl");
+    int mod1 = GetModifierVK(pMod1 ? pMod1 : L"ctrl");
     if (pMod1) Wh_FreeStringSetting(pMod1);
 
     PCWSTR pMod2 = Wh_GetStringSetting(L"modifier2");
-    int mod2 = GetModifierVK(pMod2 ? pMod2 : L"None");
+    int mod2 = GetModifierVK(pMod2 ? pMod2 : L"none");
     if (pMod2) Wh_FreeStringSetting(pMod2);
 
     PCWSTR pHotkey = Wh_GetStringSetting(L"hotkey");
-    int hotkey = GetHotkeyVK(pHotkey ? pHotkey : L"Q");
+    int hotkey = GetHotkeyVK(pHotkey ? pHotkey : L"q");
     if (pHotkey) Wh_FreeStringSetting(pHotkey);
 
     PCWSTR pFolder = Wh_GetStringSetting(L"folderName");
