@@ -85,16 +85,16 @@ The mod utilizes Windhawk to inject a `WH_KEYBOARD_LL` (low-level keyboard hook)
   - X: X
   - Y: Y
   - Z: Z
-  - 0: 0
-  - 1: 1
-  - 2: 2
-  - 3: 3
-  - 4: 4
-  - 5: 5
-  - 6: 6
-  - 7: 7
-  - 8: 8
-  - 9: 9
+  - '0': '0'
+  - '1': '1'
+  - '2': '2'
+  - '3': '3'
+  - '4': '4'
+  - '5': '5'
+  - '6': '6'
+  - '7': '7'
+  - '8': '8'
+  - '9': '9'
   - Comma: ", (Comma)"
   - Slash: "/ (Slash)"
   - Semicolon: "; (Semicolon)"
