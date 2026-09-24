@@ -2,7 +2,7 @@
 // @id              explorer-ctrlq-new-folder
 // @name            Explorer Ctrl + Modifier = New Folder
 // @description     Press a custom hotkey (default Ctrl+Q) in Explorer to create a new folder in current path.
-// @version         1.4.7.9
+// @version         1.4.8.1
 // @author          TheShadyRainbow4
 // @github          https://github.com/theshadyrainbow4
 // @homepage        https://main.elitesoftwaretech.cc
@@ -38,75 +38,75 @@ The mod utilizes Windhawk to inject a `WH_KEYBOARD_LL` (low-level keyboard hook)
 
 // ==WindhawkModSettings==
 /*
-- modifier1: "Ctrl"
+- modifier1: Ctrl
   $name: First Modifier
   $description: Primary modifier key
   $options:
-  - "Ctrl": "Ctrl"
-  - "Shift": "Shift"
-  - "Alt": "Alt"
-  - "Win": "Windows Key"
-- modifier2: "None"
+  - Ctrl: Ctrl
+  - Shift: Shift
+  - Alt: Alt
+  - Win: Windows Key
+- modifier2: None
   $name: Second Modifier (Optional)
   $description: Secondary modifier key
   $options:
-  - "None": "None"
-  - "Ctrl": "Ctrl"
-  - "Shift": "Shift"
-  - "Alt": "Alt"
-  - "Win": "Windows Key"
-- hotkey: "Q"
+  - None: None
+  - Ctrl: Ctrl
+  - Shift: Shift
+  - Alt: Alt
+  - Win: Windows Key
+- hotkey: Q
   $name: Hotkey Character
   $description: The letter or character for the hotkey
   $options:
-  - "A": "A"
-  - "B": "B"
-  - "C": "C"
-  - "D": "D"
-  - "E": "E"
-  - "F": "F"
-  - "G": "G"
-  - "H": "H"
-  - "I": "I"
-  - "J": "J"
-  - "K": "K"
-  - "L": "L"
-  - "M": "M"
-  - "N": "N"
-  - "O": "O"
-  - "P": "P"
-  - "Q": "Q"
-  - "R": "R"
-  - "S": "S"
-  - "T": "T"
-  - "U": "U"
-  - "V": "V"
-  - "W": "W"
-  - "X": "X"
-  - "Y": "Y"
-  - "Z": "Z"
-  - "0": "0"
-  - "1": "1"
-  - "2": "2"
-  - "3": "3"
-  - "4": "4"
-  - "5": "5"
-  - "6": "6"
-  - "7": "7"
-  - "8": "8"
-  - "9": "9"
-  - "Comma": ", (Comma)"
-  - "Slash": "/ (Slash)"
-  - "Semicolon": "; (Semicolon)"
-  - "Quote": "' (Quote)"
-  - "LBracket": "[ (Left Bracket)"
-  - "RBracket": "] (Right Bracket)"
-  - "Backslash": "\ (Backslash)"
-  - "Minus": "- (Minus)"
-  - "Equals": "= (Equals)"
-  - "Backtick": "` (Backtick)"
-  - "Multiply": "* (Multiply)"
-- folderName: "New folder"
+  - A: A
+  - B: B
+  - C: C
+  - D: D
+  - E: E
+  - F: F
+  - G: G
+  - H: H
+  - I: I
+  - J: J
+  - K: K
+  - L: L
+  - M: M
+  - N: N
+  - O: O
+  - P: P
+  - Q: Q
+  - R: R
+  - S: S
+  - T: T
+  - U: U
+  - V: V
+  - W: W
+  - X: X
+  - Y: Y
+  - Z: Z
+  - 0: 0
+  - 1: 1
+  - 2: 2
+  - 3: 3
+  - 4: 4
+  - 5: 5
+  - 6: 6
+  - 7: 7
+  - 8: 8
+  - 9: 9
+  - Comma: , (Comma)
+  - Slash: / (Slash)
+  - Semicolon: ; (Semicolon)
+  - Quote: ' (Quote)
+  - LBracket: [ (Left Bracket)
+  - RBracket: ] (Right Bracket)
+  - Backslash: \ (Backslash)
+  - Minus: - (Minus)
+  - Equals: = (Equals)
+  - Backtick: ` (Backtick)
+  - Multiply: * (Multiply)
+- folderName: New folder
   $name: Default Folder Name
   $description: The default name for the new folder
 */
