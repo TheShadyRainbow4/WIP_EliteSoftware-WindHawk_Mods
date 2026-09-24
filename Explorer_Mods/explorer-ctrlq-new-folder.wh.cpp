@@ -2,7 +2,7 @@
 // @id              explorer-ctrlq-new-folder
 // @name            Explorer Ctrl + Key = New Folder
 // @description     Press a custom hotkey (default Ctrl+Q) in Explorer to create a new folder in current path.
-// @version         1.4.8.2
+// @version         1.4.8.9
 // @author          TheShadyRainbow4
 // @github          https://github.com/theshadyrainbow4
 // @homepage        https://main.elitesoftwaretech.cc
@@ -38,7 +38,7 @@ The mod utilizes Windhawk to inject a `WH_KEYBOARD_LL` (low-level keyboard hook)
 
 // ==WindhawkModSettings==
 /*
-- modifier1: ctrl
+- mod1: ctrl
   $name: First Modifier
   $description: Primary modifier key
   $options:
@@ -46,7 +46,7 @@ The mod utilizes Windhawk to inject a `WH_KEYBOARD_LL` (low-level keyboard hook)
   - shift: Shift
   - alt: Alt
   - win: Windows Key
-- modifier2: none
+- mod2: none
   $name: Second Modifier (Optional)
   $description: Secondary modifier key
   $options:
@@ -55,7 +55,7 @@ The mod utilizes Windhawk to inject a `WH_KEYBOARD_LL` (low-level keyboard hook)
   - shift: Shift
   - alt: Alt
   - win: Windows Key
-- hotkey: q
+- hotkey_char: q
   $name: Hotkey Character
   $description: The letter or character for the hotkey
   $options:
@@ -184,15 +184,15 @@ static int GetHotkeyVK(const std::wstring& keyStr) {
 }
 
 static void LoadSettings() {
-    PCWSTR pMod1 = Wh_GetStringSetting(L"modifier1");
+    PCWSTR pMod1 = Wh_GetStringSetting(L"mod1");
     int mod1 = GetModifierVK(pMod1 ? pMod1 : L"ctrl");
     if (pMod1) Wh_FreeStringSetting(pMod1);
 
-    PCWSTR pMod2 = Wh_GetStringSetting(L"modifier2");
+    PCWSTR pMod2 = Wh_GetStringSetting(L"mod2");
     int mod2 = GetModifierVK(pMod2 ? pMod2 : L"none");
     if (pMod2) Wh_FreeStringSetting(pMod2);
 
-    PCWSTR pHotkey = Wh_GetStringSetting(L"hotkey");
+    PCWSTR pHotkey = Wh_GetStringSetting(L"hotkey_char");
     int hotkey = GetHotkeyVK(pHotkey ? pHotkey : L"q");
     if (pHotkey) Wh_FreeStringSetting(pHotkey);
 
