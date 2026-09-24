@@ -2,19 +2,87 @@
 // @id              explorer-new-blank-file
 // @name            Explorer Ctrl + Key = New Extensionless File
 // @description     Use Ctrl+<Letter> (default Ctrl+G) in File Explorer to create a new file in the active folder or tab.
-// @version         2.6.9.14
+// @version         2.6.9.15
 // @author          TheShadyRainbow4
 // @github          https://github.com/theshadyrainbow4
 // @homepage        https://main.elitesoftwaretech.cc
-// @include         explorer.exe
+// @include         windhawk.exe
 // @compilerOptions -lole32 -loleaut32 -lshlwapi -lshell32 -luuid -luser32 -luiautomationcore
 // ==/WindhawkMod==
 
 // ==WindhawkModSettings==
 /*
-- shortcut_letter: N
-  $name: Shortcut Letter
-  $description: The letter key to trigger creating a new blank file when pressed with Ctrl (e.g., G for Ctrl+G, M for Ctrl+M). Accepts any letter A-Z.
+- mod1: ctrl
+  $name: First Modifier
+  $description: Primary modifier key
+  $options:
+  - ctrl: Ctrl
+  - shift: Shift
+  - alt: Alt
+  - win: Windows Key
+- mod2: none
+  $name: Second Modifier (Optional)
+  $description: Secondary modifier key
+  $options:
+  - none: None
+  - ctrl: Ctrl
+  - shift: Shift
+  - alt: Alt
+  - win: Windows Key
+- hotkey_char: g
+  $name: Hotkey Character
+  $description: The letter or character for the hotkey
+  $options:
+  - a: A
+  - b: B
+  - c: C
+  - d: D
+  - e: E
+  - f: F
+  - g: G
+  - h: H
+  - i: I
+  - j: J
+  - k: K
+  - l: L
+  - m: M
+  - n: N
+  - o: O
+  - p: P
+  - q: Q
+  - r: R
+  - s: S
+  - t: T
+  - u: U
+  - v: V
+  - w: W
+  - x: X
+  - y: Y
+  - z: Z
+  - '0': '0'
+  - '1': '1'
+  - '2': '2'
+  - '3': '3'
+  - '4': '4'
+  - '5': '5'
+  - '6': '6'
+  - '7': '7'
+  - '8': '8'
+  - '9': '9'
+  - comma: ", (Comma)"
+  - slash: "/ (Slash)"
+  - semicolon: "; (Semicolon)"
+  - quote: "' (Quote)"
+  - lbracket: "[ (Left Bracket)"
+  - rbracket: "] (Right Bracket)"
+  - backslash: "\ (Backslash)"
+  - minus: "- (Minus)"
+  - equals: "= (Equals)"
+  - backtick: "` (Backtick)"
+  - multiply: "* (Multiply)"
+- fileName: file
+  $name: Default File Name
+  $description: The default name for the new file
 */
 // ==/WindhawkModSettings==
 
@@ -154,7 +222,10 @@ static std::wstring GetParentDir(const std::wstring& fullPath) {
 }
 
 static std::wstring MakeUniqueFilename(const std::wstring& dir) {
-    std::wstring path = JoinPath(dir, L"file");
+    AcquireSRWLockShared(&g_settingsLock);
+    std::wstring baseName = g_fileName;
+    ReleaseSRWLockShared(&g_settingsLock);
+    std::wstring path = JoinPath(dir, baseName);
 
     if (!PathFileExistsW(path.c_str())) {
         return path;
@@ -162,7 +233,7 @@ static std::wstring MakeUniqueFilename(const std::wstring& dir) {
 
     for (int i = 2; i < 10000; ++i) {
         wchar_t buf[64] = {0};
-        swprintf_s(buf, ARRAYSIZE(buf), L"file (%d)", i);
+        swprintf_s(buf, ARRAYSIZE(buf), L"%s (%d)", baseName.c_str(), i);
 
         path = JoinPath(dir, buf);
         if (!PathFileExistsW(path.c_str())) {
@@ -170,7 +241,7 @@ static std::wstring MakeUniqueFilename(const std::wstring& dir) {
         }
     }
 
-    return JoinPath(dir, L"file_new");
+    return JoinPath(dir, baseName + L"_new");
 }
 
 static std::wstring GetDesktopDir() {
@@ -397,17 +468,96 @@ static void SendSimpleKey(WORD key) {
     SendInput(ARRAYSIZE(inputs), inputs, sizeof(INPUT));
 }
 
-static volatile WORD g_targetKeyVk = 'N';
+
+static SRWLOCK g_settingsLock = SRWLOCK_INIT;
+static int g_mod1 = VK_CONTROL;
+static int g_mod2 = 0;
+static int g_hotkey = 'G';
+static std::wstring g_fileName = L"file";
+
+static int GetModifierVK(const std::wstring& modStr) {
+    if (modStr == L"ctrl") return VK_CONTROL;
+    if (modStr == L"shift") return VK_SHIFT;
+    if (modStr == L"alt") return VK_MENU;
+    if (modStr == L"win") return VK_LWIN;
+    return 0;
+}
+
+static int GetHotkeyVK(const std::wstring& keyStr) {
+    if (keyStr.empty()) return 'G';
+    
+    if (keyStr.length() == 1) {
+        wchar_t c = towupper(keyStr[0]);
+        if (c >= L'A' && c <= L'Z') return c;
+        if (c >= L'0' && c <= L'9') return c;
+        switch (c) {
+            case L',': return VK_OEM_COMMA;
+            case L'/': return VK_OEM_2;
+            case L';': return VK_OEM_1;
+            case L'\'': return VK_OEM_7;
+            case L'[': return VK_OEM_4;
+            case L']': return VK_OEM_6;
+            case L'\\': return VK_OEM_5;
+            case L'-': return VK_OEM_MINUS;
+            case L'=': return VK_OEM_PLUS;
+            case L'`': return VK_OEM_3;
+            case L'*': return VK_MULTIPLY;
+        }
+    }
+    
+    if (keyStr == L"comma") return VK_OEM_COMMA;
+    if (keyStr == L"slash") return VK_OEM_2;
+    if (keyStr == L"semicolon") return VK_OEM_1;
+    if (keyStr == L"quote") return VK_OEM_7;
+    if (keyStr == L"lbracket") return VK_OEM_4;
+    if (keyStr == L"rbracket") return VK_OEM_6;
+    if (keyStr == L"backslash") return VK_OEM_5;
+    if (keyStr == L"minus") return VK_OEM_MINUS;
+    if (keyStr == L"equals") return VK_OEM_PLUS;
+    if (keyStr == L"backtick") return VK_OEM_3;
+    if (keyStr == L"multiply") return VK_MULTIPLY;
+    
+    return 'G';
+}
+
+static bool CheckModifiers() {
+    bool mod1_pressed = (g_mod1 == 0) || ((GetAsyncKeyState(g_mod1) & 0x8000) != 0);
+    bool mod2_pressed = (g_mod2 == 0) || ((GetAsyncKeyState(g_mod2) & 0x8000) != 0);
+    
+    // Ensure that if a modifier IS NOT selected, it MUST NOT be pressed
+    if (g_mod1 != VK_CONTROL && g_mod2 != VK_CONTROL && (GetAsyncKeyState(VK_CONTROL) & 0x8000)) return false;
+    if (g_mod1 != VK_SHIFT && g_mod2 != VK_SHIFT && (GetAsyncKeyState(VK_SHIFT) & 0x8000)) return false;
+    if (g_mod1 != VK_MENU && g_mod2 != VK_MENU && (GetAsyncKeyState(VK_MENU) & 0x8000)) return false;
+    if (g_mod1 != VK_LWIN && g_mod2 != VK_LWIN && ((GetAsyncKeyState(VK_LWIN) & 0x8000) || (GetAsyncKeyState(VK_RWIN) & 0x8000))) return false;
+    
+    return mod1_pressed && mod2_pressed;
+}
+
 
 static void LoadSettings() {
-    PCWSTR keyStr = Wh_GetStringSetting(L"shortcut_letter");
-    WORD vk = 'N';
-    if (keyStr) {
-        if (keyStr[0] != L'\0') {
-            wchar_t c = keyStr[0];
-            if (c >= L'a' && c <= L'z') {
-                vk = (WORD)(c - L'a' + L'A');
-            } else if (c >= L'A' && c <= L'Z') {
+    PCWSTR pMod1 = Wh_GetStringSetting(L"mod1");
+    int mod1 = GetModifierVK(pMod1 ? pMod1 : L"ctrl");
+    if (pMod1) Wh_FreeStringSetting(pMod1);
+
+    PCWSTR pMod2 = Wh_GetStringSetting(L"mod2");
+    int mod2 = GetModifierVK(pMod2 ? pMod2 : L"none");
+    if (pMod2) Wh_FreeStringSetting(pMod2);
+
+    PCWSTR pHotkey = Wh_GetStringSetting(L"hotkey_char");
+    int hotkey = GetHotkeyVK(pHotkey ? pHotkey : L"g");
+    if (pHotkey) Wh_FreeStringSetting(pHotkey);
+
+    PCWSTR pFile = Wh_GetStringSetting(L"fileName");
+    std::wstring fileName = (pFile && wcslen(pFile) > 0) ? pFile : L"file";
+    if (pFile) Wh_FreeStringSetting(pFile);
+
+    AcquireSRWLockExclusive(&g_settingsLock);
+    g_mod1 = mod1;
+    g_mod2 = mod2;
+    g_hotkey = hotkey;
+    g_fileName = fileName;
+    ReleaseSRWLockExclusive(&g_settingsLock);
+} else if (c >= L'A' && c <= L'Z') {
                 vk = (WORD)c;
             }
         }
@@ -1228,17 +1378,16 @@ static LRESULT CALLBACK LowLevelKeybdProc(int nCode,
             return CallNextHookEx(g_lowLevelHook, nCode, wParam, lParam);
         }
 
-        const WORD targetKey = g_targetKeyVk;
+        AcquireSRWLockShared(&g_settingsLock);
+        int targetKey = g_hotkey;
+        ReleaseSRWLockShared(&g_settingsLock);
 
         if (isKeyDown && info->vkCode == targetKey) {
-            const bool ctrl =
-                (GetAsyncKeyState(VK_CONTROL) & 0x8000) != 0;
-            const bool shift =
-                (GetAsyncKeyState(VK_SHIFT) & 0x8000) != 0;
-            const bool alt =
-                (GetAsyncKeyState(VK_MENU) & 0x8000) != 0;
+            AcquireSRWLockShared(&g_settingsLock);
+            bool modifiers_match = CheckModifiers();
+            ReleaseSRWLockShared(&g_settingsLock);
 
-            if (ctrl && !shift && !alt && IsExplorerForegroundForHotkey()) {
+            if (modifiers_match && IsExplorerForegroundForHotkey()) {
                 InterlockedExchange(&g_ctrlNSequence, 1);
 
                 if (g_workerThreadId &&
