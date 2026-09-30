@@ -5,6 +5,7 @@
 // @version         1.0.2
 // @author          TheShadyRainbow4
 // @github          https://github.com/TheShadyRainbow4
+// @homepage        https://main.elitesoftwaretech.cc
 // @include         explorer.exe
 // @include         control.exe
 // @compilerOptions -luser32 -lcomctl32
@@ -14,7 +15,7 @@
 // ==WindhawkModReadme==
 /*
 # Explorer View Menu Unlocker
-Modern Windows intentionally disables (grays out) standard view options in the Menu Bar when navigating specific system folders like the Classic Control Panel.
+Modern Windows intentionally disables (grays out) standard view options in the Menu Bar when navigating specific system folders like the Classic Control Panel. (This mostly applies to Windows 11)
 
 ### How it Works (v1.0.2 Update):
 1. **Visual Unlock:** Intercepts `EnableMenuItem` and `SetMenuItemInfoW` to block the operating system from graying out the View options.

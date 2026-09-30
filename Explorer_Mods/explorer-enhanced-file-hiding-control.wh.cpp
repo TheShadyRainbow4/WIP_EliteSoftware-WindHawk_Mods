@@ -1,10 +1,11 @@
 // ==WindhawkMod==
-// @id              enhanced-file-hiding-control
-// @name            Enhanced-File-Hiding(Fork of Hide Dot Files)
-// @description     Hide dotfiles and folders, manage always hide / show / supports multiple types starting with . in Windows Explorer and Desktop
-// @version         1.0.3
+// @id              explorer-enhanced-file-hiding-control
+// @name            Enhanced-File-Hiding
+// @description     (Fork of Hide Dot Files) Hide dotfiles and folders, manage always hide / show / supports multiple types starting with . in Windows Explorer and Desktop
+// @version         1.0.3.3
 // @author          @TheShadyRainbow4
 // @github          https://github.com/TheShaydyRainbow4
+// @homepage        https://main.elitesoftwaretech.cc
 // @include         explorer.exe
 // @compilerOptions -lcomctl32 -lole32 -loleaut32 -lshell32 -lshlwapi -luuid
 // ==/WindhawkMod==

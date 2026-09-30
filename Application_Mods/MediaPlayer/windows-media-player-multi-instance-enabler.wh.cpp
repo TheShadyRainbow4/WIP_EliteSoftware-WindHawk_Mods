@@ -17,6 +17,12 @@ Unlocks the restriction preventing multiple instances of Windows Media Player fr
 - **Universal Architecture Support:** Automatically detects and targets both 32-bit and 64-bit builds of `wmplayer.exe`.
 - **Version Agnostic:** Bypasses the core mutex checks used from legacy player builds all the way up to current versions.
 - **Library Protection Sandbox:** Optional feature to force secondary player windows into a read-only database state, preventing race conditions or library data file corruption.
+
+- **This is somewhat unsafe but really cool also use at own risk** 
+- **Making Library modifications while multiple instances are open is not a good idea**
+
+## Tested on Windows Media Player 11 (Vista Version) on Windows 10 IOT Enterprise LTSC 2021
+
 */
 // ==/WindhawkModReadme==
 

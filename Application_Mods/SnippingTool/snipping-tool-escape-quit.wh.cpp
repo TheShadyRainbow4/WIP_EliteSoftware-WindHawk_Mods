@@ -2,7 +2,7 @@
 // @id              snipping-tool-escape-quit
 // @name            Snipping Tool Escape to Quit
 // @description     Instantly close the Windows 10 Snipping Tool by pressing the Escape key, improving workflow speed.
-// @version         1.0
+// @version         1.0.0.4
 // @author          TheShadyRainbow4
 // @github          https://github.com/TheShadyRainbow4
 // @homepage        https://github.com/TheShadyRainbow4
@@ -22,6 +22,8 @@ By default, the Snipping Tool might cancel a current snip when you press Escape,
 - Compile and enable the mod.
 - Open the Snipping Tool from your Start menu.
 - Press the **Escape (Esc)** key and observe that the application completely closes. 
+
+## Best if paired with my other mode snipping tool multi instance!
 */
 // ==/WindhawkModReadme==
 

@@ -2,7 +2,7 @@
 // @id              snipping-tool-multi-instance
 // @name            Snipping Tool Multiple Instances
 // @description     Allow running multiple instances of legacy Snipping Tool (snippingtool.exe) instead of focusing existing ones.
-// @version         1.0
+// @version         1.0.4.1
 // @author          TheShadyRainbow4
 // @github          https://github.com/theshadyrainbow4
 // @homepage        https://main.elitesoftwaretech.cc
@@ -20,6 +20,8 @@ This Windhawk mod allows running multiple concurrent instances of the legacy Sni
 Normally, when launching `snippingtool.exe` while another instance is already open, the application detects the existing named mutex (`Microsoft-Windows-TabletPC-SnippingTool-InitializingMutex`) or an existing window and brings the running instance to the foreground before exiting.
 
 This mod hooks `CreateMutexW`, `CreateMutexExW`, `OpenMutexW`, `FindWindowW`, and `FindWindowExW` inside `snippingtool.exe` so each newly launched process creates its own independent mutex and window without detecting existing instances.
+
+## Works great when paired with my other mod Snipping tool escape quit!
 */
 // ==/WindhawkModReadme==
 

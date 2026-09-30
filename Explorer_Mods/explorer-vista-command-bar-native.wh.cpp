@@ -1,10 +1,11 @@
 // ==WindhawkMod==
-// @id              vista-command-bar-native
-// @name            Vista Command Bar Layout & Icons
+// @id              explorer-vista-command-bar-native
+// @name            Explorer Vista Command Bar Layout & Icons
 // @description     Restores the Windows Vista layout of the command bar, forces native icons, and allows layout toggling. Forked from 'Aerexplorer' by aubymori and 'Windows 7 Command Bar' by ItsProfessional.
-// @version         2.0.1
+// @version         2.0.1.0
 // @author          TheShadyRainbow4
 // @github          https://github.com/TheShadyRainbow4
+// @homepage        https://main.elitesoftwaretech.cc
 // @include         explorer.exe
 // @architecture    x86-64
 // @compilerOptions -lcomctl32 -luser32 -lole32

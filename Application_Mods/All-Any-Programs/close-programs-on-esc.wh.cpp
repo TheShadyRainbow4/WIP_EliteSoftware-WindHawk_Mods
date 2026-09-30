@@ -5,6 +5,7 @@
 // @version         4.5.0.2
 // @author          TheShadyRainbow4
 // @github          https://github.com/TheShadyRainbow4/
+// @homepage        https://main.elitesoftwaretech.cc
 // @include         *
 // @compilerOptions -lcomdlg32 -lshlwapi
 // ==/WindhawkMod==
@@ -16,7 +17,7 @@
 Press **Esc** to terminate target applications. 
 
 ### Core Features
-- **Unified List**: All apps (Default and Custom) now live in one clean, high-density list.
+- **Unified List**: All apps (Default and Custom) live in one clean, high-density list.
 - **Per-Item Modifiers**: Bind specific key combos (Ctrl, Shift, Alt) to individual applications.
 - **Top-Most Dialogs**: Confirmations punch through all other windows without locking the UI thread.
 */
@@ -68,7 +69,7 @@ Press **Esc** to terminate target applications.
       $name: Shift
     - modAlt: false
       $name: Alt
-  - - processName: "win32explorer.exe"
+  - - processName: "windowsterminal.exe"
       $name: Process Name
     - confirmExit: false
       $name: Confirm Exit

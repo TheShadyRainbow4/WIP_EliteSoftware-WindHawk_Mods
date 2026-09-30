@@ -15,6 +15,8 @@
 
 # Explorer Custom Hotkey to New Folder
 
+(Formally Ctrl Q New Folder)
+
 This mod enhances Windows Explorer by mapping a configurable hotkey (default **Ctrl+Q**) to create a new folder instantly.
 
 ### Purpose & Fork Details
