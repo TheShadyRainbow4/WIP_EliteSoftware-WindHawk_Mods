@@ -1,0 +1,11 @@
+$sourceDir = "C:\Users\Administrator\Desktop\Projects\WindHawk_Mods\WIP_EliteSoftware-WindHawk_Mods"
+$destDir = "C:\ProgramData\Windhawk\ModsSource"
+
+if (-not (Test-Path $destDir)) {
+    New-Item -ItemType Directory -Path $destDir | Out-Null
+}
+
+Get-ChildItem -Path $sourceDir -Filter "*.wh.cpp" -Recurse | ForEach-Object {
+    Copy-Item -Path $_.FullName -Destination $destDir -Force
+    Write-Host "Copied $($_.Name) to $destDir"
+}
